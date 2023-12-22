@@ -56,7 +56,6 @@ websites = [
     "www.shopify.com",
     "www.zillow.com",
     "www.fandom.com",
-    "www.homedepot.com",
     "www.paypal.com",
     "www.cnn.com",
     "www.bbc.com",
@@ -88,14 +87,14 @@ service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
 # Loops though 500 different times to generate pacets
-for i in range(500):
+for i in range(5000):
 
     # Picks a random website from the list
     ran_website = random.choice(websites)
 
     # Randomizes the choice between doH and non-doH lookups does 70% doH and 30% non-doH
-    doh = random.randint(1,10)
-    if doh <= 7 :
+    doh = random.randint(1,100)
+    if doh <= 50 :
         print("Performing DoH lookup:", ran_website)
         # Chooses a random DoH server from the list
         doh_serv = random.choice(doh_servers)
@@ -139,9 +138,10 @@ for i in range(500):
         print("Performing non-DoH lookup:", ran_website)
 
         try:
-            # Preforms the non-doH lookup
-            driver.get("https://" + ran_website)
-            print("Non-DoH title:", driver.title)
+           # Preforms the non-doH lookup
+           print("Response Content:")
+           response = requests.get(f"https://"+ran_website)
+           print(response.content)
         
         # Will show the error if one occurs
         except Exception as e:

@@ -17,7 +17,7 @@ labels = []
 
 for index,row in data.iterrows():
     # check for DoH traffic
-    dohservers = ['104.16.248.249','102.16.249.249','8.8.8.8','8.8.4.4']
+    dohservers = ['104.16.248.249','102.16.249.249', '104.16.249.249', '8.8.8.8','8.8.4.4']
     if row['SourceIP'] in dohservers or row['DestinationIP'] in dohservers: 
         labels.append('DoH')
     else:

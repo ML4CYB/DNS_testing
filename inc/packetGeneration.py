@@ -86,9 +86,14 @@ options.add_argument('--disable-dev-shm-usage')
 service = Service()
 driver = webdriver.Chrome(service=service, options=options)
 
-# Loops though 500 different times to generate pacets
-for i in range(5000):
+# Loops though 1000 different times to generate pacets
+for i in range(1000):
+#------------------------------------------------------------------------------------------------------
+#                                     Post Lab Exercise
 
+# Replace the value witin the if satement below from 50 to the values indicated in your lab manual and
+# rerun the lab
+#------------------------------------------------------------------------------------------------------
     # Picks a random website from the list
     ran_website = random.choice(websites)
 

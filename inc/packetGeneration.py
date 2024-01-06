@@ -99,7 +99,7 @@ for i in range(1000):
 
     # Randomizes the choice between doH and non-doH lookups does 70% doH and 30% non-doH
     doh = random.randint(1,100)
-    if doh <= 50 :
+    if doh <= 50 : # Change value from 50 to values indicated in lab manual
         print("Performing DoH lookup:", ran_website)
         # Chooses a random DoH server from the list
         doh_serv = random.choice(doh_servers)

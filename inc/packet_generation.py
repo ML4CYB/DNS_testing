@@ -3,7 +3,6 @@ import requests
 from requests.exceptions import RequestException
 
 # --- Configuration Constants ---
-# Use constants for easier modification and readability.
 NUM_REQUESTS = 500
 
 # --------------------------------------------------------------------------------------------------------------------
@@ -29,8 +28,7 @@ DOH_SERVERS = [
     },
 ]
 
-# Cleaned list of websites. Avoid prefixes like 'www.' or 'http://'
-# to ensure they work correctly with both DoH queries and browser navigation.
+# List of websites to look up
 WEBSITES = [
     "google.com",
     "youtube.com",
@@ -98,7 +96,7 @@ def perform_doh_lookup(website):
             server_config["url"],
             params=params,
             headers=server_config["headers"],
-            timeout=10,  # Add a timeout to prevent hanging
+            timeout=10,
         )
         response.raise_for_status()
         print("Response Content:")
@@ -130,20 +128,14 @@ def main():
     """
     Main function to set up the driver and run the traffic generation loop.
     """
-    driver = None  # Initialize driver to None
-    try:
-        for i in range(NUM_REQUESTS):
-            website = random.choice(WEBSITES)
+    for _ in range(NUM_REQUESTS):
+        website = random.choice(WEBSITES)
 
-            if random.uniform(0, 100) < DOH_PROBABILITY_PERCENT:
-                perform_doh_lookup(website)
-            else:
-                perform_nondoh_lookup(website)
+        if random.uniform(0, 100) < DOH_PROBABILITY_PERCENT:
+            perform_doh_lookup(website)
+        else:
+            perform_nondoh_lookup(website)
 
-    finally:
-        if driver:
-            print("\nShutting down the Chrome driver.")
-            driver.quit()
         print("Script finished.")
 
 
